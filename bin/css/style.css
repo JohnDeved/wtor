@@ -1,0 +1,275 @@
+body.pg-loaded > .inner {
+  opacity: 1 !important;
+}
+body > .inner {
+  opacity: 0;
+}
+body {
+    background-color: #efefef;
+}
+.desc {
+    line-height: 13px;
+    font-size: 13px;
+    text-align: left;
+}
+i.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.watchvideo .card {
+    margin: 0 auto;
+    width: 80%;
+}
+.aleft {
+    left: 0;
+    position: absolute;
+    margin-top: 200px;
+    width: 160px;
+    height: 600px;
+    background-color: grey;
+    background-image: url(https://i.imgur.com/mc2ag8m.png);
+    z-index: 0;
+}
+.aright {
+    right: 0;
+    position: absolute;
+    margin-top: 200px;
+    width: 160px;
+    height: 600px;
+    background-color: grey;
+    background-image: url(https://i.imgur.com/mc2ag8m.png);
+    z-index: 0;
+}
+@media screen and (max-width: 1650px) {
+    .aleft,
+    .aright {
+        display: none;
+    }
+}
+#toast-container {
+    display: block !important;
+    z-index: 1000000 !important;
+}
+.toast {
+    display: block !important;
+}
+.card .card-content .card-title {
+    line-height: 30px;
+}
+nav ul a:hover {
+    background: #ef334c;
+}
+nav {
+    z-index: 100;
+    background-color: #242930;
+    border-bottom: solid #ef334c;
+    overflow: hidden;
+}
+.free-wall .btn {
+    margin-bottom: 5px;
+}
+.torrentInfo {
+    line-height: 15px;
+}
+.seedinfo {
+    font-size: 12px
+}
+#freewall {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 70px;
+}
+.brick {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20% !important;
+}
+@media screen and (max-width: 1650px) {
+  #freewall {
+    width: 90%;
+  }
+  .brick {
+    width: 25% !important;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .brick {
+    width: 50% !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  .brick {
+    width: 100% !important;
+  }
+}
+.brick .card-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+  background: white;
+  transition: opacity .5s;
+}
+.inv{
+  opacity: 0 !important;
+}
+.brick img {
+    max-width: 100%;
+}
+.brick .card-image:hover ~ .card-content {
+    opacity: .5;
+}
+.brick .card-content:hover {
+    opacity: 1;
+}
+.brick .card-content:hover +.card-image {
+    opacity: 0;
+}
+.card .card-reveal {
+    background-color: rgba(255, 255, 255, 0.90) !important;
+}
+#video .torrentsTime {
+    width: 100%;
+    height: 600px;
+    background-color: #000;
+}
+span {
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+
+    -moz-user-select: none;
+    /* Firefox */
+
+    -ms-user-select: none;
+    /* IE10+ */
+    /* Rules below not implemented in browsers yet */
+
+    -o-user-select: none;
+    user-select: none;
+}
+.card-action p {
+    magrin: 0;
+}
+.card {
+    margin-top: 1.5rem;
+    opacity: 1;
+    transition: opacity 1s;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 100px auto;
+}
+.double-bounce1,
+.double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+.grid-item {
+    float: left;
+    width: 20%;
+    height: auto;
+    border: 2px solid rgba(0, 0, 0, 0);
+    overflow: hidden;
+}
+.grid-item img {
+    width: 100%;
+    height: auto;
+}
+@-webkit-keyframes sk-bounce {
+    0%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+.searchlogo {
+    display: block;
+    margin: 70px auto;
+}
+.searchbtn {
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+}
+.pg-loading-logo {
+    height: 30vh;
+    width: auto;
+}
+/* label focus color */
+
+.input-field input[type=text]:focus+label {
+    color: #ef334c;
+}
+/* label underline focus color */
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #ef334c;
+    box-shadow: 0 1px 0 0 #ef334c;
+}
+/* icon prefix focus color */
+
+.input-field .prefix.active {
+    color: #ef334c;
+}
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: #ef334c;
+}
+.btn:hover,
+.btn-large:hover {
+    background-color: #ef334c;
+}
+.btn,
+.btn-large {
+    background-color: #CC253B;
+}
+a {
+    color: #ffab40;
+}
+.loadmore {
+    margin: 50px auto;
+    display: block;
+    width: 80%;
+}
+.logocontainer {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+.logocontainer p {
+    position: absolute;
+    bottom: -6px;
+    right: 52px;
+    font-size: 18px;
+}

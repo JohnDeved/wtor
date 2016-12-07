@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <meta name="description" content="Wtor.steam allows you to stream all the newest movies online in HD and for free" />
+            <title>Wtor Streaming</title>
+            <link rel="icon" href="../bin/favicon.ico" />
+            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/please-wait/0.0.5/please-wait.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinkit.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+            <link rel="stylesheet" href="../bin/css/style.css" />
+        </head>
+    </head>
+    <body>
+      <iframe style="width: 100%; height: 100%; position: fixed;" src="" width="" height=""></iframe>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/please-wait/0.0.5/please-wait.min.js"></script>
+      <script src="https://cdn.torrents-time.com/torrentstime.min.js"></script>
+      <script src="https://www.youtube.com/iframe_api"></script>
+      <div id="muteYouTubeVideoPlayer" style="width: 100%; height: 100%; position: fixed;"></div>
+
+      <!-- https://www.youtube.com/v/i-80SGWfEjM?&&playlist=i-80SGWfEjM&autoplay=1&controls=0&disablekb=1&fs=0&loop=0&showinfo=0&start=15&rel=0&iv_load_policy=3&enablejsapi=1&version=3 -->
+      <script async src="https://www.youtube.com/iframe_api"></script>
+      <script>
+       function onYouTubeIframeAPIReady() {
+        player = new YT.Player('muteYouTubeVideoPlayer', {
+          videoId: 'i-80SGWfEjM', // YouTube Video ID
+          playerVars: {
+            autoplay: 1,        // Auto-play the video on load
+            controls: 0,        // Show pause/play buttons in player
+            showinfo: 0,        // Hide the video title
+            modestbranding: 1,  // Hide the Youtube Logo
+            loop: 1,            // Run the video in a loop
+            fs: 0,              // Hide the full screen button
+            cc_load_policy: 0, // Hide closed captions
+            iv_load_policy: 3,  // Hide the Video Annotations
+            start: 15,
+            autohide: 0         // Hide video controls when playing
+          },
+          events: {
+            onReady: function(e) {
+              e.target.mute();
+            }
+          }
+        });
+       }
+
+       // Written by @labnol
+      </script>
+    </body>
+</html>
