@@ -9,10 +9,6 @@ router.get('/', function(req, res, next) {
             info: JSON.parse(data),
             quality: query.split('@')[1]
         })
-        console.log({
-            info: JSON.parse(data),
-            quality: query.split('@')[1]
-        });
     })
 });
 
