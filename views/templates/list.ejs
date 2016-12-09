@@ -14,9 +14,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4 truncate"><%=info[i].title %></span>
-                    <span class="seedinfo"><a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>">
-                    imdb <%=info[i].imdb_data.imdbRating %>/10</a> (<%=info[i].imdb_data.Released %>)
-                    </span>
+                    <span class="seedinfo">(<%=info[i].year %>)</span>
                 </div>
                 <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="width: 80%; height: 80%;">
                     <div class="modal-content" style="">
@@ -24,14 +22,12 @@
                             <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
                             <h3 style="text-align: initial; color: white; text-shadow: 1px 1px 6px black;"><%=info[i].title %></h3>
                             <p style="text-align: initial; color: white; background: rgba(36, 41, 48, .5); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
-                            <%=info[i].imdb_data.Plot %>
+                            N/A
                             <br><br>
-                            <% if (info[i].imdb_data.Awards !== undefined && info[i].imdb_data.Awards !== '') { %>
-                                <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> <%=info[i].imdb_data.Awards %><br>
-                            <% } %>
-                            <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> <%=info[i].imdb_data.Released %><br>
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> <%=info[i].imdb_data.Runtime %><br>
-                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>"> <b>Rating:</b> <%=info[i].imdb_data.imdbRating %>/10</a><br>
+                            <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> N/A<br>
+                            <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> N/A<br>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> N/A<br>
+                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/"> <b>Rating:</b> N/A/10</a><br>
                             <% for (var j = 0; j < Object.keys(info[i].torrents.en).length; j++) { %>
                                 <br><a class="btn tooltipped" data-position="top" href="/watch?<%=info[i].imdb_id %>@<%=Object.keys(info[i].torrents.en)[j] %>" data-tooltip="click to watch"><%=Object.keys(info[i].torrents.en)[j] %></a><br>
                                 <span class="seedinfo">Seeders: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].seed %> | Peers: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].peer %></span>
