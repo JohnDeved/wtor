@@ -7,6 +7,15 @@ body > .inner {
 body {
     background-color: #efefef;
 }
+.movie-info {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity .5s;
+}
+.movie-info:hover {
+    opacity: 1;
+}
 .desc {
     line-height: 13px;
     font-size: 13px;
