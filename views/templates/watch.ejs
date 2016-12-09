@@ -1,0 +1,20 @@
+<div class="row streaming">
+    <div class="watchvideo">
+        <div class="card">
+            <div class="card-image">
+                <div id="video">
+                    <div class="torrentsTime">
+                        <iframe style="height: 100%; width: 100%;" src="http://embed.torrents-time.com/#publisher_id=765&source=<%=info.torrents.en[quality].url %>&poster=<%=info.images.poster.split('w500').join('original') %>&title=<%=info.title %>" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h4 class="titel"><%=info.title %></h4>
+                <a target="_blank" href="https://torrents-time.com/">why do i need to download a plugin?</a>
+            </div>
+            <div class="card-action">
+                <p>magnet: <a href="<%=info.torrents.en[quality].url %>"><%=info.torrents.en[quality].url.match(/\burn:btih:([A-F\d]+)\b/)[1] %></a></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -76,18 +76,18 @@ nav {
     font-size: 12px
 }
 #freewall {
-    width: 80%;
+    width: 85%;
     margin: auto;
     text-align: center;
     padding-top: 70px;
 }
 .brick {
-  border-radius: 0 !important;
-  margin: 0 !important;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: middle;
-  width: 20% !important;
+    border-radius: 0 !important;
+    margin: 0px -2px !important;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    width: 16% !important;
 }
 @media screen and (max-width: 1650px) {
   #freewall {
@@ -100,6 +100,9 @@ nav {
 @media screen and (max-width: 1150px) {
   .brick {
     width: 50% !important;
+  }
+  .modal-content img {
+      display: none;
   }
 }
 @media screen and (max-width: 600px) {
@@ -123,7 +126,7 @@ nav {
     max-width: 100%;
 }
 .brick .card-image:hover ~ .card-content {
-    opacity: .5;
+    opacity: 1;
 }
 .brick .card-content:hover {
     opacity: 1;
