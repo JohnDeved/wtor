@@ -27,7 +27,7 @@
                             <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> <span class='awards'>N/A</span><br>
                             <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> <span class='released'>N/A</span><br>
                             <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> <span class='runtime'>N/A</span><br>
-                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/"> <b>Rating:</b> <span class='rating'>N/A</span></a>/10<br>
+                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>"> <b>Rating:</b> <span class='rating'>N/A</span>/10</a><br>
                             <% for (var j = 0; j < Object.keys(info[i].torrents.en).length; j++) { %>
                                 <br><a class="btn tooltipped" data-position="top" href="/watch?<%=info[i].imdb_id %>@<%=Object.keys(info[i].torrents.en)[j] %>" data-tooltip="click to watch"><%=Object.keys(info[i].torrents.en)[j] %></a><br>
                                 <span class="seedinfo">Seeders: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].seed %> | Peers: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].peer %></span>
