@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
         var query = req._parsedUrl.query
         request('https://tv-v2.api-fetch.website/' + query, function(error, response, data) {
             if (query.match(/movie\/tt\d{7,}/) !== null) {
-                request('http://www.omdbapi.com/?i=' + query.split('/')[1] + '&plot=full&r=json', function(error, response, imdb) {
+                request('http://www.omdbapi.com/?i=' + query.split('/')[1] + '&plot=short&r=json', function(error, response, imdb) {
                     data = JSON.parse(data)
                     data.imdb_data = JSON.parse(imdb)
                     res.send(data)
