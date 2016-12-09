@@ -18,7 +18,7 @@
                     imdb <%=info[i].imdb_data.imdbRating %>/10</a> (<%=info[i].imdb_data.Released %>)
                     </span>
                 </div>
-                <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer" style="width: 80%; height: 80%;">
+                <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="width: 80%; height: 80%;">
                     <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.5);">
                         <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
                         <h3 style="text-align: initial; color: white;"><%=info[i].title %></h1>
