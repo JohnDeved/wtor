@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     if (req._parsedUrl.query == undefined) {
         res.send('u lost or smth?')
-    } else {
+    } else if (req._parsedUrl.query.split('movie').length > 1) {
         var query = req._parsedUrl.query
         request('https://tv-v2.api-fetch.website/' + query, function(error, response, data) {
             if (error == null && data != undefined) {
@@ -26,6 +26,13 @@ router.get('/', function(req, res, next) {
                 res.send('fail')
             }
         })
+    } else if (req._parsedUrl.query.split('imdb').length > 1) {
+        var query = req._parsedUrl.query
+        request('http://www.omdbapi.com/?i=' + query.split('/')[1] + '&plot=full&r=json', function(error, response, imdb) {
+            res.send(imdb)
+        })
+    } else {
+        res.send('dafuq r u trying to do m8??')
     }
 })
 

@@ -4,7 +4,7 @@
             <div class="brick card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
-                    <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$('#modal_<%=info[i].imdb_id %> iframe')[0].src=('https://www.youtube.com/embed/'+'<%=info[i].trailer %>'.split('watch?v=')[1]+'?autoplay=1&controls=0&fs=0&rel=0&showinfo=0&start=15&iv_load_policy=3')">
+                    <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$.imdb_data('<%=info[i].imdb_id %>'); $('#modal_<%=info[i].imdb_id %> iframe')[0].src=('https://www.youtube.com/embed/'+'<%=info[i].trailer %>'.split('watch?v=')[1]+'?autoplay=1&controls=0&fs=0&rel=0&showinfo=0&start=15&iv_load_policy=3')">
                     <% } else { %>
                     <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>">
                     <% } %>
@@ -21,13 +21,13 @@
                         <div class="movie-info">
                             <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
                             <h3 style="text-align: initial; color: white; text-shadow: 1px 1px 6px black;"><%=info[i].title %></h3>
-                            <p style="text-align: initial; color: white; background: rgba(36, 41, 48, .5); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
-                            N/A
-                            <br><br>
-                            <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> N/A<br>
-                            <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> N/A<br>
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> N/A<br>
-                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/"> <b>Rating:</b> N/A/10</a><br>
+                            <p style="text-align: initial; color: white; background: rgba(36, 41, 48, 1); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
+                            <span class='plot'>N/A</span><br>
+                            <br>
+                            <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> <span class='awards'>N/A</span><br>
+                            <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> <span class='released'>N/A</span><br>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> <span class='runtime'>N/A</span><br>
+                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/"> <b>Rating:</b> <span class='rating'>N/A</span></a>/10<br>
                             <% for (var j = 0; j < Object.keys(info[i].torrents.en).length; j++) { %>
                                 <br><a class="btn tooltipped" data-position="top" href="/watch?<%=info[i].imdb_id %>@<%=Object.keys(info[i].torrents.en)[j] %>" data-tooltip="click to watch"><%=Object.keys(info[i].torrents.en)[j] %></a><br>
                                 <span class="seedinfo">Seeders: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].seed %> | Peers: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].peer %></span>
