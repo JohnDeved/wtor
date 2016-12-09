@@ -19,10 +19,10 @@
                     </span>
                 </div>
                 <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="width: 80%; height: 80%;">
-                    <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.5);">
+                    <div class="modal-content" style="">
                         <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
-                        <h3 style="text-align: initial; color: white;"><%=info[i].title %></h1>
-                        <p style="text-align: initial; color: white;">
+                        <h3 style="text-align: initial; color: white;"><%=info[i].title %></h3>
+                        <p style="text-align: initial; color: white; background: rgba(36, 41, 48, 0.5); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
                         <%=info[i].imdb_data.Plot %>
                         <br><br>
                         <% if (info[i].imdb_data.Awards !== undefined && info[i].imdb_data.Awards !== '') { %>
