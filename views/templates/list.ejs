@@ -1,7 +1,7 @@
 <div class="listing">
         <div id="freewall" class="free-wall" style="position: relative">
         <% for (var i = 0; i < info.length; i++) { %>
-            <div class="brick card" data-aos="fade-up">
+            <div class="brick card">
                 <div class="card-image waves-effect waves-block waves-light">
                     <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
                     <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$('#modal_<%=info[i].imdb_id %> iframe')[0].src=('https://www.youtube.com/embed/'+'<%=info[i].trailer %>'.split('watch?v=')[1]+'?autoplay=1&controls=0&fs=0&rel=0&showinfo=0&start=15&iv_load_policy=3')">
