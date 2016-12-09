@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
         })
     } else {
         var query = req._parsedUrl.query
-        request('/api?movies/1' + query, function(error, response, data) {
+        request('http://' + req.rawHeaders[1] + '/api?movies/1?' + query, function(error, response, data) {
+            console.log(JSON.parse(data))
             res.render('movies', {
                 info: JSON.parse(data)
             })
