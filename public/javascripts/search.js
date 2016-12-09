@@ -7,6 +7,8 @@ $('.searchbtn').click(function () {
   }
   window.location = '/movies?' + n() + e()
 })
-$('.modal-trigger').leanModal()
+$('.modal-trigger').leanModal({
+    dismissible: false
+})
 $('select').material_select()
 $('.tooltipped').tooltip({delay: 500})
