@@ -16,7 +16,12 @@
         <!-- Menu -->
         <% include templates/menu.ejs %>
         <!-- List -->
-        <% include templates/list.ejs %>
+        <div class="listing">
+            <div id="freewall" class="free-wall" style="position: relative">
+                <% include templates/list.ejs %>
+            </div>
+            <% if (info.length >= 50) { %><a class="btn loadmore waves-effect" page="2?<%=query %>" onclick="$.loadmore(this.getAttribute('page'))">load more</a><% } %>
+        </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>

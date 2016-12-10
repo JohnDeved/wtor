@@ -1,51 +1,46 @@
-<div class="listing">
-        <div id="freewall" class="free-wall" style="position: relative">
-        <% for (var i = 0; i < info.length; i++) { %>
-            <div class="brick card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
-                    <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$.imdb_data('<%=info[i].imdb_id %>'); $('#modal_<%=info[i].imdb_id %> iframe')[0].src=('https://www.youtube.com/embed/'+'<%=info[i].trailer %>'.split('watch?v=')[1]+'?autoplay=1&controls=0&fs=0&rel=0&showinfo=0&start=15&iv_load_policy=3')">
-                    <% } else { %>
-                    <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>">
-                    <% } %>
-                        <img class="activator" src="https://i.imgur.com/CFjUEuq.jpg" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'" >
-                        <img style="position: absolute" src="<%=info[i].images.poster %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
-                    </a>
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4 truncate"><%=info[i].title %></span>
-                    <span class="seedinfo">(<%=info[i].year %>)</span>
-                </div>
-                <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="width: 80%; height: 80%;">
-                    <div class="modal-content" style="">
-                        <div class="movie-info">
-                            <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
-                            <h3 style="text-align: initial; color: white; text-shadow: 1px 1px 6px black;"><%=info[i].title %></h3>
-                            <p style="text-align: initial; color: white; background: rgba(36, 41, 48, 1); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
-                            <span class='plot'>N/A</span><br>
-                            <a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>">read more</a><br>
-                            <br>
-                            <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> <span class='awards'>N/A</span><br>
-                            <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> <span class='released'>N/A</span><br>
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> <span class='runtime'>N/A</span><br>
-                            <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>"> <b>Rating:</b> <span class='rating'>N/A</span>/10</a><br>
-                            <% for (var j = 0; j < Object.keys(info[i].torrents.en).length; j++) { %>
-                                <br><a class="btn tooltipped" data-position="top" href="/watch?<%=info[i].imdb_id %>@<%=Object.keys(info[i].torrents.en)[j] %>" data-tooltip="click to watch"><%=Object.keys(info[i].torrents.en)[j] %></a><br>
-                                <span class="seedinfo">Seeders: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].seed %> | Peers: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].peer %></span>
-                                <br><%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].filesize %><br>
-                            <% } %>
-                            </p>
-                        </div>
-                        <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
-                            <iframe src="" frameborder="0" allowfullscreen="0" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: -1;"></iframe>
-                        <% } %>
-                    </div>
-                    <div class="modal-footer" style="background-color: #242930">
-                        <a class="modal-action modal-close waves-effect btn-flat white-text" onclick="$('#modal_<%=info[i].imdb_id %> iframe')[0].src=''">close</a>
-                    </div>
-                </div>
-            </div>
-        <% } %>
+<% for (var i = 0; i < info.length; i++) { %>
+    <div class="brick card <%=info[i].imdb_id %>">
+        <div class="card-image waves-effect waves-block waves-light">
+            <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
+            <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$.imdb_data('<%=info[i].imdb_id %>'); $('#modal_<%=info[i].imdb_id %> iframe')[0].src=('https://www.youtube.com/embed/'+'<%=info[i].trailer %>'.split('watch?v=')[1]+'?autoplay=1&controls=0&fs=0&rel=0&showinfo=0&start=15&iv_load_policy=3')">
+            <% } else { %>
+            <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>">
+            <% } %>
+                <img class="activator" src="https://i.imgur.com/CFjUEuq.jpg" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'" >
+                <img style="position: absolute" src="<%=info[i].images.poster %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
+            </a>
         </div>
-    <% if (info.length >= 50) { %><a class="btn loadmore waves-effect" onclick="loadMore()">load more</a><% } %>
-</div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 truncate"><%=info[i].title %></span>
+            <span class="seedinfo">(<%=info[i].year %>)</span>
+        </div>
+        <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="width: 80%; height: 80%;">
+            <div class="modal-content" style="">
+                <div class="movie-info">
+                    <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
+                    <h3 style="text-align: initial; color: white; text-shadow: 1px 1px 6px black;"><%=info[i].title %></h3>
+                    <p style="text-align: initial; color: white; background: rgba(36, 41, 48, 1); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
+                    <span class='plot'>N/A</span><br>
+                    <a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>">read more</a><br>
+                    <br>
+                    <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> <span class='awards'>N/A</span><br>
+                    <i class="fa fa-calendar" aria-hidden="true"></i> <b>Released:</b> <span class='released'>N/A</span><br>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i> <b>Runtime:</b> <span class='runtime'>N/A</span><br>
+                    <i class="fa fa-star" aria-hidden="true"></i><a target="_blank" href="http://www.imdb.com/title/<%=info[i].imdb_id %>"> <b>Rating:</b> <span class='rating'>N/A</span>/10</a><br>
+                    <% for (var j = 0; j < Object.keys(info[i].torrents.en).length; j++) { %>
+                        <br><a class="btn tooltipped" data-position="top" href="/watch?<%=info[i].imdb_id %>@<%=Object.keys(info[i].torrents.en)[j] %>" data-tooltip="click to watch"><%=Object.keys(info[i].torrents.en)[j] %></a><br>
+                        <span class="seedinfo">Seeders: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].seed %> | Peers: <%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].peer %></span>
+                        <br><%=info[i].torrents.en[Object.keys(info[i].torrents.en)[j]].filesize %><br>
+                    <% } %>
+                    </p>
+                </div>
+                <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
+                    <iframe src="" frameborder="0" allowfullscreen="0" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: -1;"></iframe>
+                <% } %>
+            </div>
+            <div class="modal-footer" style="background-color: #242930">
+                <a class="modal-action modal-close waves-effect btn-flat white-text" onclick="$('#modal_<%=info[i].imdb_id %> iframe')[0].src=''">close</a>
+            </div>
+        </div>
+    </div>
+<% } %>
