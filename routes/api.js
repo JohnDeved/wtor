@@ -3,37 +3,36 @@ var request = require('request');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    if (req._parsedUrl.query == undefined) {
-        res.send('u lost or smth?')
-    } else if (req._parsedUrl.query.split('movie').length > 1) {
-        var query = req._parsedUrl.query
-        request('https://tv-v2.api-fetch.website/' + query, function(error, response, data) {
-            if (error == null && data != undefined) {
-                if (query.match(/movie\/tt\d{7,}/) !== null) {
-                    request('http://www.omdbapi.com/?i=' + query.split('/')[1] + '&plot=full&r=json', function(error, response, imdb) {
-                        data = JSON.parse(data)
-                        data.imdb_data = JSON.parse(imdb)
-                        res.send(data)
-                    })
-                } else {
-                    data = JSON.parse(data)
-                    res.send(data)
-                }
-            } else {
-                console.log('error:', error)
-                console.log('response:', response)
-                console.log('data:', data)
-                res.send('fail')
-            }
-        })
-    } else if (req._parsedUrl.query.split('imdb').length > 1) {
-        var query = req._parsedUrl.query
-        request('http://www.omdbapi.com/?i=' + query.split('/')[1] + '&plot=full&r=json', function(error, response, imdb) {
-            res.send(imdb)
-        })
-    } else {
-        res.send('dafuq r u trying to do m8??')
+    var api = {
+        movies: (q) => {
+            request('https://tv-v2.api-fetch.website/' + q, function(error, response, data) {
+                res.send(data)
+                console.log('movie page load was performed')
+            })
+        },
+        movie: (q) => {
+            request('https://tv-v2.api-fetch.website/' + q, function(error, response, data) {
+                res.send(data)
+                console.log('movie page load was performed')
+            })
+        },
+        imdb: (q) => {
+            request('http://www.omdbapi.com/?i=' + q.split('/')[1] + '&plot=full&r=json', function(error, response, imdb) {
+                res.send(imdb)
+                console.log('imdb info load was performed')
+            })
+        },
+        load: (q) => {
+            request('http://' + req.headers.host + '/api?movies/' + q.split('/')[1], function(error, response, data) {
+                res.render('load',{
+                    info: JSON.parse(data)
+                })
+                console.log('list load was performed')
+            })
+        }
     }
+    query = req._parsedUrl.query
+    api[query.split('/')[0]](query)
 })
 
 module.exports = router;
