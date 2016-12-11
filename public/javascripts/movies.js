@@ -8,11 +8,6 @@ $.imdb_data = (id) => {
         dataType: 'JSON',
         success: (data) => {
             console.log(data)
-            if (data.Plot.length > 500) {
-                $('#modal_' + id + ' .modal-content .plot').text(data.Plot.substr(0,300)+'...')
-            } else {
-                $('#modal_' + id + ' .modal-content .plot').text(data.Plot)
-            }
             $('#modal_' + id + ' .modal-content .awards').text(data.Awards)
             $('#modal_' + id + ' .modal-content .released').text(data.Released)
             $('#modal_' + id + ' .modal-content .runtime').text(data.Runtime)
