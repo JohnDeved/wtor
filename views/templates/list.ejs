@@ -2,7 +2,7 @@
     <div class="brick card <%=info[i].imdb_id %>">
         <div class="card-image waves-effect waves-block waves-light">
             <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
-            <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$.imdb_data('<%=info[i].imdb_id %>'); $('#modal_<%=info[i].imdb_id %> iframe')[0].src=('https://www.youtube.com/embed/'+'<%=info[i].trailer %>'.split('watch?v=')[1]+'?autoplay=1&controls=0&fs=0&rel=0&showinfo=0&start=15&iv_load_policy=3')">
+            <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>" onclick="$.imdb_data('<%=info[i].imdb_id %>'); $.getVideo('video_<%=info[i].imdb_id %>', '<%=info[i].trailer %>'.split('watch?v=')[1]);">
             <% } else { %>
             <a class="modal-trigger" href="#modal_<%=info[i].imdb_id %>">
             <% } %>
@@ -32,11 +32,15 @@
                     </p>
                 </div>
                 <% if (info[i].trailer !== undefined && info[i].trailer !== '') { %>
-                    <iframe src="" frameborder="0" allowfullscreen="0" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: -1;"></iframe>
+                    <div class="video_<%=info[i].imdb_id %>_container">
+                        <div id="video_<%=info[i].imdb_id %>" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: -1;"></div>
+                    </div>
                 <% } %>
             </div>
             <div class="modal-footer" style="background-color: #242930">
-                <a class="modal-action modal-close waves-effect btn-flat white-text" onclick="$('#modal_<%=info[i].imdb_id %> iframe')[0].src=''">close</a>
+                <a class="modal-action btn-flat white-text volume_<%=info[i].imdb_id %>" style="float: left" onclick="$.muteVideo('<%=info[i].imdb_id %>')"><i unselectable="on" class="material-icons">volume_off</i></a>
+                <a class="modal-action btn-flat white-text play_<%=info[i].imdb_id %>" style="float: left" onclick="$.pauseVideo('<%=info[i].imdb_id %>')"><i unselectable="on" class="material-icons">pause</i></a>
+                <a class="modal-action modal-close waves-effect waves-red btn-flat white-text exit_<%=info[i].imdb_id %>" onclick="$.removeVideo('<%=info[i].imdb_id %>')"><i class="material-icons">close</i></a>
             </div>
         </div>
     </div>

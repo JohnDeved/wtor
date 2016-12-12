@@ -46,3 +46,69 @@ $.loadmore = (q) => {
         }
     })
 }
+
+$.getVideo = (elem, id) => {
+    var callback = () => {
+        window.player = new YT.Player(elem, {
+            videoId: id,
+            playerVars: {
+                autoplay: 1,
+                autohide: 1,
+                modestbranding: 0,
+                rel: 0,
+                showinfo: 0,
+                controls: 0,
+                disablekb: 1,
+                enablejsapi: 1,
+                iv_load_policy: 3
+            },
+            events: {
+                'onReady': onPlayerReady,
+            }
+        })
+    }
+    window.onPlayerReady = (event) => {
+        event.target.mute()
+    }
+    if (!window.YT) {
+        $.getScript("https://www.youtube.com/iframe_api")
+        window.onYouTubeIframeAPIReady = callback
+    } else {
+        callback()
+    }
+}
+
+$.removeVideo = (id) => {
+    $('.video_' + id + '_container').children().remove()
+    $('.video_' + id + '_container').append('<div id="video_' + id + '" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0;z-index: -1;"></div>')
+    $('.volume_' + id).html('<i class="material-icons">volume_off</i>')
+    $('.play_' + id).html('<i class="material-icons">pause</i>')
+}
+
+$.pauseVideo = (id) => {
+    var action = {
+        pause: (id) => {
+            player.pauseVideo()
+            $('.play_' + id).html('<i class="material-icons">play_arrow</i>')
+        },
+        play_arrow: (id) => {
+            player.playVideo()
+            $('.play_' + id).html('<i class="material-icons">pause</i>')
+        }
+    }
+    action[$('.play_' + id).text()](id)
+}
+
+$.muteVideo = (id) => {
+    var action = {
+        volume_off: (id) => {
+            player.unMute()
+            $('.volume_' + id).html('<i class="material-icons">volume_up</i>')
+        },
+        volume_up: (id) => {
+            player.mute()
+            $('.volume_' + id).html('<i class="material-icons">volume_off</i>')
+        }
+    }
+    action[$('.volume_' + id).text()](id)
+}
