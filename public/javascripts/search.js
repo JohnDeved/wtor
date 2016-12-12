@@ -3,9 +3,9 @@ $('.searchbtn').click(function () {
     return 'sort=' + $('select').val()
   }
   function e () {
-    return $('input').val() !== '' ? '&keywords=' + $('input').val() : ''
+    return $('input').val() !== '' ? '&keywords=' + escape($('input').val()) : ''
   }
-  window.location = '/movies?' + n() + escape(e())
+  window.location = '/movies?' + n() + e()
 })
 $('.modal-trigger').leanModal({
     dismissible: false
