@@ -1,8 +1,8 @@
-var express = require('express');
-var request = require('request');
-var router = express.Router();
+var express = require('express')
+var request = require('request')
+var router = express.Router()
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
     var query = req._parsedUrl.query
     request('http://' + req.headers.host + '/api?movie/' + query.split('@')[0], function(error, response, data) {
         res.render('watch', {
@@ -12,4 +12,4 @@ router.get('/', function(req, res, next) {
     })
 });
 
-module.exports = router;
+module.exports = router
