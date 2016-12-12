@@ -10,12 +10,12 @@
                 <img style="position: absolute" src="<%=info[i].images.poster %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
             </a>
         </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4 truncate"><%=info[i].title %></span>
+        <div class="card-content notclickable">
+            <span class="card-title truncate"><%=info[i].title %></span>
             <span class="seedinfo">(<%=info[i].year %>)</span>
         </div>
         <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="background-color: black;">
-            <div class="modal-content" style="">
+            <div class="modal-content">
                 <div class="movie-info">
                     <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
                     <h3 style="text-align: initial; color: white; text-shadow: 1px 1px 6px black;"><%=info[i].title %></h3>
