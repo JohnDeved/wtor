@@ -5,7 +5,7 @@ $('.searchbtn').click(function () {
   function e () {
     return $('input').val() !== '' ? '&keywords=' + $('input').val() : ''
   }
-  window.location = '/movies?' + n() + e()
+  window.location = '/movies?' + n() + escape(e())
 })
 $('.modal-trigger').leanModal({
     dismissible: false
