@@ -3,22 +3,21 @@ var request = require('request')
 var fs = require('fs')
 var router = express.Router()
 
-router.get('/', (req, res, next) => {
+router.get('/:api/:query', (req, res, next) => {
     var api = {
-        movies: (q) => {
-            request('https://tv-v2.api-fetch.website/' + q, (error, response, data) => {
+        movies: (q, a, o) => {
+            request('https://tv-v2.api-fetch.website/' + a + '/' + q + (o ? '?' + o : ''), (error, response, data) => {
                 res.send(data)
                 console.log('movie page load was performed')
             })
         },
-        movie: (q) => {
-            request('https://tv-v2.api-fetch.website/' + q, (error, response, data) => {
+        movie: (q, a, o) => {
+            request('https://tv-v2.api-fetch.website/' + a + '/' + q + (o ? '?' + o : ''), (error, response, data) => {
                 res.send(data)
                 console.log('movie page load was performed')
             })
         },
-        imdb: (q) => {
-            var imdb_id = q.split('/')[1]
+        imdb: (imdb_id) => {
             fs.readFile('cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
                 var writeCache = (imdb_id) => {
                     request('http://www.omdbapi.com/?i=' + imdb_id + '&plot=full&r=json', (error, response, imdb) => {
@@ -28,7 +27,7 @@ router.get('/', (req, res, next) => {
                         imdb.cached = curDate
                         fs.writeFile('cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
                             console.log('cache saved', imdb_id)
-                        });
+                        })
                         res.send(imdb)
                         console.log('imdb info load was performed', imdb_id)
                     })
@@ -55,7 +54,7 @@ router.get('/', (req, res, next) => {
             })
         },
         load: (q) => {
-            request('http://' + req.headers.host + '/api?movies/' + q.split('/')[1], (error, response, data) => {
+            request('http://' + req.headers.host + '/api/movies/' + q, (error, response, data) => {
                 res.render('load',{
                     info: JSON.parse(data)
                 })
@@ -63,8 +62,7 @@ router.get('/', (req, res, next) => {
             })
         }
     }
-    query = req._parsedUrl.query
-    api[query.split('/')[0]](query)
+    api[req.params.api](req.params.query, req.params.api, req._parsedUrl.query, req.query)
 })
 
 module.exports = router

@@ -4,7 +4,7 @@ $('nav').css('position', 'fixed')
 
 $.imdb_data = (id) => {
     $.ajax({
-        url: ('/api?imdb/' + id),
+        url: ('/api/imdb/' + id),
         dataType: 'JSON',
         success: (data) => {
             console.log(data)
@@ -22,7 +22,7 @@ $.loadmore = (q) => {
     $('.loadmore').remove()
     $('.listing').append('<div class="spinner" style="margin: 50px auto"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>')
     $.ajax({
-        url: ('/api?load/' + q),
+        url: ('/api/load/' + q),
         success: (data) => {
             curBricks = $('.brick').length
             $('#freewall').append(data)
