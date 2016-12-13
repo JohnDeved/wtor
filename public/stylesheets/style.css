@@ -1,18 +1,16 @@
 body.pg-loaded > .inner {
-  opacity: 1 !important;
+    opacity: 1 !important;
 }
 body > .inner {
-  opacity: 0;
+    opacity: 0;
 }
 body {
     background-color: #efefef;
 }
 i {
-    -webkit-user-select: none; /* Chrome/Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
-
-    /* Rules below not implemented in browsers yet */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
 }
@@ -114,25 +112,25 @@ nav {
     width: 16% !important;
 }
 @media screen and (max-width: 1650px) {
-  #freewall {
-    width: 90%;
-  }
-  .brick {
-    width: 25% !important;
-  }
+    #freewall {
+        width: 90%;
+    }
+    .brick {
+        width: 25% !important;
+    }
 }
 @media screen and (max-width: 1150px) {
-  .brick {
-    width: 50% !important;
-  }
-  .modal-content img {
-      display: none;
-  }
+    .brick {
+        width: 50% !important;
+    }
+    .modal-content img {
+        display: none;
+    }
 }
 @media screen and (max-width: 600px) {
-  .brick {
-    width: 100% !important;
-  }
+    .brick {
+        width: 100% !important;
+    }
 }
 .brick .card-content {
     color: white;
@@ -144,8 +142,8 @@ nav {
     transition: opacity .5s;
     background: rgba(36, 41, 48, .9);
 }
-.inv{
-  opacity: 0 !important;
+.inv {
+    opacity: 0 !important;
 }
 .brick img {
     max-width: 100%;
@@ -240,19 +238,13 @@ nav {
     height: 30vh;
     width: auto;
 }
-/* label focus color */
-
 .input-field input[type=text]:focus+label {
     color: #ef334c;
 }
-/* label underline focus color */
-
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #ef334c;
     box-shadow: 0 1px 0 0 #ef334c;
 }
-/* icon prefix focus color */
-
 .input-field .prefix.active {
     color: #ef334c;
 }
