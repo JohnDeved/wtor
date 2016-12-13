@@ -18,19 +18,39 @@ router.get('/', (req, res, next) => {
             })
         },
         imdb: (q) => {
-            var imdb_id = q.split('/')[1];
+            var imdb_id = q.split('/')[1]
             fs.readFile('cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
-                if (err) {
+                var writeCache = (imdb_id) => {
                     request('http://www.omdbapi.com/?i=' + imdb_id + '&plot=full&r=json', (error, response, imdb) => {
-                        fs.writeFile('cache/' + imdb_id + '.json', imdb, (err) => {
+                        imdb = JSON.parse(imdb)
+                        var date = new Date()
+                        var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
+                        imdb.cached = curDate
+                        fs.writeFile('cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
                             console.log('cache saved', imdb_id)
                         });
                         res.send(imdb)
                         console.log('imdb info load was performed', imdb_id)
                     })
+                }
+                if (!err && imdb) {
+                    try {
+                        imdb = JSON.parse(imdb)
+                        var date = new Date()
+                        var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
+                        if (!imdb.cached || imdb.cached !== curDate) {
+                            writeCache(imdb_id)
+                            console.log('overwriting old cache', imdb_id)
+                        } else {
+                            res.send(imdb)
+                            console.log('cache loaded', imdb_id)
+                        }
+                    } catch (err) {
+                        writeCache(imdb_id)
+                        console.log('overwriting broken cache', imdb_id, err)
+                    }
                 } else {
-                    res.send(imdb)
-                    console.log('cache loaded', imdb_id)
+                    writeCache(imdb_id)
                 }
             })
         },
