@@ -18,14 +18,15 @@ router.get('/:api/:query', (req, res, next) => {
             })
         },
         imdb: (imdb_id) => {
-            fs.readFile('cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
+            console.log(__dirname + '/../cache/' + imdb_id + '.json');
+            fs.readFile(__dirname + '/../cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
                 var writeCache = (imdb_id) => {
                     request('http://www.omdbapi.com/?i=' + imdb_id + '&plot=full&r=json', (error, response, imdb) => {
                         imdb = JSON.parse(imdb)
                         var date = new Date()
                         var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
                         imdb.cached = curDate
-                        fs.writeFile('cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
+                        fs.writeFile(__dirname + '/../cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
                             console.log('cache saved', imdb_id)
                         })
                         res.send(imdb)
