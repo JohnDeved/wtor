@@ -18,7 +18,6 @@ router.get('/:api/:query', (req, res, next) => {
             })
         },
         imdb: (imdb_id) => {
-            console.log(__dirname + '/../cache/' + imdb_id + '.json');
             fs.readFile(__dirname + '/../cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
                 var writeCache = (imdb_id) => {
                     request('http://www.omdbapi.com/?i=' + imdb_id + '&plot=full&r=json', (error, response, imdb) => {
