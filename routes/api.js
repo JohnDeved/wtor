@@ -49,7 +49,7 @@ router.get('/:api/:query', (req, res, next) => {
                         imdb = JSON.parse(imdb)
                         var date = new Date()
                         var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
-                        if (!imdb.cached || imdb.cached !== 'curDate') {
+                        if (!imdb.cached || imdb.cached !== curDate) {
                             res.send(imdb)
                             writeCache(imdb_id, imdb, false)
                             console.log('overwriting old cache', imdb_id)
