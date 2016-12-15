@@ -19,17 +19,29 @@ router.get('/:api/:query', (req, res, next) => {
         },
         imdb: (imdb_id) => {
             fs.readFile(__dirname + '/../cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
-                var writeCache = (imdb_id) => {
+                var writeCache = (imdb_id, imdb_cache, send) => {
                     request('http://www.omdbapi.com/?i=' + imdb_id + '&plot=full&r=json', (error, response, imdb) => {
-                        imdb = JSON.parse(imdb)
-                        var date = new Date()
-                        var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
-                        imdb.cached = curDate
-                        fs.writeFile(__dirname + '/../cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
-                            console.log('cache saved', imdb_id)
-                        })
-                        res.send(imdb)
-                        console.log('imdb info load was performed', imdb_id)
+                        if (error && imdb_cache && send) {
+                            console.log('api request error. restoring using old cache...', imdb_id)
+                            res.send(imdb_cache)
+                        } else if (!error) {
+                            imdb = JSON.parse(imdb)
+                            var date = new Date()
+                            var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
+                            imdb.cached = curDate
+                            fs.writeFile(__dirname + '/../cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
+                                console.log('cache saved', imdb_id)
+                            })
+                            if (send) {
+                                res.send(imdb)
+                            }
+                            console.log('imdb info load was performed', imdb_id)
+                        } else {
+                            console.log('api request error.', imdb_id)
+                            if (send) {
+                                res.send('fail')
+                            }
+                        }
                     })
                 }
                 if (!err && imdb) {
@@ -37,19 +49,20 @@ router.get('/:api/:query', (req, res, next) => {
                         imdb = JSON.parse(imdb)
                         var date = new Date()
                         var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
-                        if (!imdb.cached || imdb.cached !== curDate) {
-                            writeCache(imdb_id)
+                        if (!imdb.cached || imdb.cached !== 'curDate') {
+                            res.send(imdb)
+                            writeCache(imdb_id, imdb, false)
                             console.log('overwriting old cache', imdb_id)
                         } else {
                             res.send(imdb)
                             console.log('cache loaded', imdb_id)
                         }
                     } catch (err) {
-                        writeCache(imdb_id)
+                        writeCache(imdb_id, imdb, true)
                         console.log('overwriting broken cache', imdb_id, err)
                     }
                 } else {
-                    writeCache(imdb_id)
+                    writeCache(imdb_id, false, true)
                 }
             })
         },
