@@ -18,7 +18,7 @@ $.imdb_data = (id) => {
 
 $.loadmore = (q) => {
     var page = $('.loadmore')[0].getAttribute('page')
-    page = ((parseInt(page.split('?')[0]) + 1) + '?' + page.split('?')[1])
+    page = ((parseInt(page.split('/')[0]) + 1) + '/' + page.split('/')[1])
     $('.loadmore').remove()
     $('.listing').append('<div class="spinner" style="margin: 50px auto"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>')
     $.ajax({

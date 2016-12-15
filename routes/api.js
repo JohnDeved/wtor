@@ -3,71 +3,94 @@ var request = require('request')
 var fs = require('fs')
 var router = express.Router()
 
-router.get('/:api/:query', (req, res, next) => {
+router.get('/:api/:query/:opt?', (req, res, next) => {
+    var writeCache = (url, query, folder, cache, send, isArray) => {
+        request(url, (error, response, data) => {
+            if (error && cache && send) {
+                console.log('api request error. restoring using old cache...', query)
+                res.send(cache)
+            } else if (!error) {
+                if (isArray) {
+                    var array = data
+                    data = new Object
+                    data.array = JSON.parse(array)
+                } else {
+                    data = JSON.parse(data)
+                }
+                var date = new Date()
+                var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
+                data.cached = curDate
+                fs.writeFile(folder, JSON.stringify(data), (err) => {
+                    console.log(folder, 'cache saved', query)
+                })
+                if (send) {
+                    if (isArray) {
+                        res.send(data.array)
+                    } else {
+                        res.send(data)
+                    }
+                }
+                console.log(folder, 'api load was performed', query)
+            } else {
+                console.log(folder, 'api request error.', query)
+                if (send) {
+                    res.send('fail')
+                }
+            }
+        })
+    }
+
+    var readCache = (folder, url, query, isArray) => {
+        fs.readFile(folder, (err, data) => {
+            if (!err && data) {
+                try {
+                    data = JSON.parse(data)
+                    var date = new Date()
+                    var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
+                    if (!data.cached || data.cached !== curDate) {
+                        if (isArray) {
+                            res.send(data.array)
+                        } else {
+                            res.send(data)
+                        }
+                        writeCache(url, query, folder, data, false, isArray)
+                        console.log('overwriting old cache', query)
+                    } else {
+                        if (isArray) {
+                            res.send(data.array)
+                        } else {
+                            res.send(data)
+                        }
+                        console.log('cache loaded', query)
+                    }
+                } catch (err) {
+                    writeCache(url, query, folder, data, true, isArray)
+                    console.log('overwriting broken cache', query, err)
+                }
+            } else {
+                writeCache(url, query, folder, false, true, isArray)
+            }
+        })
+    }
+
     var api = {
         movies: (q, a, o) => {
-            request('https://tv-v2.api-fetch.website/' + a + '/' + q + (o ? '?' + o : ''), (error, response, data) => {
-                res.send(data)
-                console.log('movie page load was performed')
-            })
+            var folder = __dirname + '/../cache/search/' + q + '_' + o + '.json'
+            var url = 'https://tv-v2.api-fetch.website/' + a + '/' + q + (o ? '?' + o : '')
+            readCache(folder, url, q, true)
         },
         movie: (q, a, o) => {
-            request('https://tv-v2.api-fetch.website/' + a + '/' + q + (o ? '?' + o : ''), (error, response, data) => {
-                res.send(data)
-                console.log('movie page load was performed')
-            })
+            var folder = __dirname + '/../cache/movie/' + q + '.json'
+            var url = 'https://tv-v2.api-fetch.website/' + a + '/' + q + (o ? '?' + o : '')
+            readCache(folder, url, q)
         },
-        imdb: (imdb_id) => {
-            fs.readFile(__dirname + '/../cache/' + imdb_id + '.json', 'utf8', (err, imdb) => {
-                var writeCache = (imdb_id, imdb_cache, send) => {
-                    request('http://www.omdbapi.com/?i=' + imdb_id + '&plot=full&r=json', (error, response, imdb) => {
-                        if (error && imdb_cache && send) {
-                            console.log('api request error. restoring using old cache...', imdb_id)
-                            res.send(imdb_cache)
-                        } else if (!error) {
-                            imdb = JSON.parse(imdb)
-                            var date = new Date()
-                            var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
-                            imdb.cached = curDate
-                            fs.writeFile(__dirname + '/../cache/' + imdb_id + '.json', JSON.stringify(imdb), (err) => {
-                                console.log('cache saved', imdb_id)
-                            })
-                            if (send) {
-                                res.send(imdb)
-                            }
-                            console.log('imdb info load was performed', imdb_id)
-                        } else {
-                            console.log('api request error.', imdb_id)
-                            if (send) {
-                                res.send('fail')
-                            }
-                        }
-                    })
-                }
-                if (!err && imdb) {
-                    try {
-                        imdb = JSON.parse(imdb)
-                        var date = new Date()
-                        var curDate = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear()
-                        if (!imdb.cached || imdb.cached !== curDate) {
-                            res.send(imdb)
-                            writeCache(imdb_id, imdb, false)
-                            console.log('overwriting old cache', imdb_id)
-                        } else {
-                            res.send(imdb)
-                            console.log('cache loaded', imdb_id)
-                        }
-                    } catch (err) {
-                        writeCache(imdb_id, imdb, true)
-                        console.log('overwriting broken cache', imdb_id, err)
-                    }
-                } else {
-                    writeCache(imdb_id, false, true)
-                }
-            })
+        imdb: (q, a, o) => {
+            var folder = __dirname + '/../cache/imdb/' + q + '.json'
+            var url = 'http://www.omdbapi.com/?i=' + q + '&plot=full&r=json'
+            readCache(folder, url, q)
         },
-        load: (q) => {
-            request('http://' + req.headers.host + '/api/movies/' + q, (error, response, data) => {
+        load: (q, a, o) => {
+            request('http://' + req.headers.host + '/api/movies/' + q + (o ? '/' + o : ''), (error, response, data) => {
                 res.render('load',{
                     info: JSON.parse(data)
                 })
@@ -75,7 +98,7 @@ router.get('/:api/:query', (req, res, next) => {
             })
         }
     }
-    api[req.params.api](req.params.query, req.params.api, req._parsedUrl.query, req.query)
+    api[req.params.api](req.params.query, req.params.api, req.params.opt, req.query)
 })
 
 module.exports = router
