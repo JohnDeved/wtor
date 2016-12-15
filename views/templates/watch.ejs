@@ -1,19 +1,36 @@
 <div class="row streaming">
     <div class="watchvideo">
         <div class="card">
-            <div class="card-image">
-                <div id="video">
-                    <div class="torrentsTime">
-                        <iframe style="height: 100%; width: 100%;" src="http://embed.torrents-time.com/#publisher_id=765&source=<%=info.torrents.en[quality].url %>&poster=<%=info.images.poster.split('w500').join('original') %>&title=<%=info.title %>" frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
             <div class="card-content">
-                <h4 class="titel"><%=info.title %></h4>
-                <a target="_blank" href="https://torrents-time.com/">why do i need to download a plugin?</a>
+                <h1 class="titel" style="text-align: center;"><%=info.title %></h1>
+            </div>
+            <div class="card-image">
+                <ul class="collapsible" data-collapsible="accordion" style="width: 50%; margin: 50px auto;">
+                    <li style="background: #ef334c">
+                        <div style="text-align: center;" class="collapsible-header">Step One</div>
+                        <div class="collapsible-body">
+                            <a target="_blank" href="https://webtorrent.io/desktop/">
+                                <h5 class="titel" style="text-align: center; color: white">Download WebTorrent Desktop</h5>
+                                <img src="https://i.gyazo.com/fc560431008b997be9c222adf2e15b6a.png" alt="">
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="text-align: center;" class="collapsible-header">Step Two</div>
+                        <div class="collapsible-body">
+                            <img src="https://i.gyazo.com/37485184d28797a495f3754542ffca5e.gif" alt="">
+                        </div>
+                    </li>
+                    <li>
+                        <div style="text-align: center;" class="collapsible-header">Watch!</div>
+                        <div class="collapsible-body">
+                            <img src="https://i.gyazo.com/e0bf8cd4a20a2423b4749eba7dcec815.gif" alt="">
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="card-action">
-                <p><a href="<%=info.torrents.en[quality].url %>"><i class="fa fa-magnet" aria-hidden="true"></i> magnet</a></p>
+                <p style="text-align: center;"><a href="<%=info.torrents.en[quality].url %>"><i class="fa fa-magnet" aria-hidden="true"></i> magnet</a></p>
             </div>
         </div>
     </div>
