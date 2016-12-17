@@ -98,7 +98,11 @@ router.get('/:api/:query/:opt?', (req, res, next) => {
             })
         }
     }
-    api[req.params.api](req.params.query, req.params.api, req.params.opt, req.query)
+    try {
+        api[req.params.api](req.params.query, req.params.api, req.params.opt, req.query)
+    } catch (e) {
+        res.send('nope')
+    }
 })
 
 module.exports = router
