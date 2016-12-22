@@ -17,7 +17,7 @@
         <div id="modal_<%=info[i].imdb_id %>" class="modal modal-fixed-footer modal-movie" style="background-color: black;">
             <div class="modal-content">
                 <div class="movie-info">
-                    <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster.split('w500').join('original') %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
+                    <img class="z-depth-2" style="float: left; height: 100%; border-radius: 6px; margin-right: 20px" src="<%=info[i].images.poster %>" onerror="this.src='https://i.imgur.com/jDYdS1L.jpg'">
                     <h3 style="text-align: initial; color: white; text-shadow: 1px 1px 6px black;"><%=info[i].title %></h3>
                     <p style="text-align: initial; color: white; background: rgba(36, 41, 48, .9); padding: 25px 20px; border-radius: 10px;" class="z-depth-2">
                     <i class="fa fa-trophy" aria-hidden="true"></i> <b>Awards:</b> <span class='awards'>N/A</span><br>
