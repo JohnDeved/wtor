@@ -43,5 +43,6 @@
                 <a class="modal-action modal-close waves-effect waves-red btn-flat white-text exit_<%=info[i].imdb_id %>" onclick="$.removeVideo('<%=info[i].imdb_id %>')"><i class="material-icons">close</i></a>
             </div>
         </div>
+        <script>$('.modal-trigger').leanModal({dismissible: false})</script>
     </div>
 <% } %>

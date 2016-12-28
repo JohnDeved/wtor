@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
     </head>
     <body>
         <!-- Menu -->
@@ -23,8 +25,6 @@
             <% if (info.length >= 50) { %><a class="btn loadmore waves-effect" page="2/<%=query %>" onclick="$.loadmore(this.getAttribute('page'))">load more</a><% } %>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
         <script src="https://blockchain.info/Resources/js/pay-now-button.js"></script>
         <script src="/javascripts/movies.js"></script>
     </body>
